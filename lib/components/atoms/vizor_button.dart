@@ -132,13 +132,14 @@ class VizorButton extends StatelessWidget {
     final splashColor = color.withOpacity(0.3);
 
     if (icon == null) {
-      return FlatButton(
+      return TextButton(
         onPressed: () => _onPressed(context),
-        highlightColor: color,
-        splashColor: splashColor,
-        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        padding: padding ?? theme.padding,
-        textColor: textColor ?? theme.textColor,
+        style: TextButton.styleFrom(
+          foregroundColor: color,
+          backgroundColor: splashColor,
+          minimumSize: Size.zero,
+          padding: padding ?? EdgeInsets.all(16.0),
+        ),
         child: label,
       );
     } else if (label == null) {
@@ -150,13 +151,14 @@ class VizorButton extends StatelessWidget {
         icon: icon,
       );
     } else {
-      return FlatButton.icon(
+      return TextButton.icon(
         onPressed: () => _onPressed(context),
-        highlightColor: color,
-        splashColor: splashColor,
-        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        padding: padding ?? theme.padding,
-        textColor: textColor ?? theme.textColor,
+        style: TextButton.styleFrom(
+          foregroundColor: textColor ?? theme.textColor,
+          backgroundColor: splashColor,
+          minimumSize: Size.zero,
+          padding: padding ?? theme.padding,
+        ),
         icon: icon,
         label: label,
       );
