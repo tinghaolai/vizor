@@ -89,15 +89,14 @@ class _VizorFrameState extends State<VizorFrame> with TickerProviderStateMixin {
       position: widget.position,
       decoration: FrameDecoration(
         step: _animation.value,
-        color: (widget.color ?? theme?.color)!,
+        color: (widget.color ?? theme?.color),
         lineColor: (widget.lineColor ?? theme?.lineColor)!,
         lineStroke: (widget.lineStroke ?? theme?.lineStroke)!,
         cornerStroke: (widget.cornerStroke ?? theme?.cornerStroke)!,
         cornerLengthRatio: (widget.cornerLengthRatio ?? theme?.cornerLengthRatio)!,
-        gradient: (widget.gradient ?? theme?.gradient)!,
-        boxShadow: (widget.boxShadow ?? theme?.boxShadow)!,
-        backgroundBlendMode:
-            (widget.backgroundBlendMode ?? theme?.backgroundBlendMode)!,
+        gradient: widget.gradient ?? theme?.gradient,
+        boxShadow: (widget.boxShadow ?? theme?.boxShadow),
+        backgroundBlendMode: widget.backgroundBlendMode ?? theme?.backgroundBlendMode,
       ),
       child: widget.child,
     );
@@ -136,9 +135,9 @@ class FrameDecoration extends Decoration {
       lineStroke: lineStroke,
       cornerStroke: cornerStroke,
       cornerLengthRatio: cornerLengthRatio,
-      gradient: gradient!,
-      boxShadow: boxShadow!,
-      backgroundBlendMode: backgroundBlendMode!,
+      gradient: gradient,
+      boxShadow: boxShadow,
+      backgroundBlendMode: backgroundBlendMode,
     );
   }
 }
