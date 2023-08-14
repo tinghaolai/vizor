@@ -116,7 +116,7 @@ class FrameDecoration extends Decoration {
   final BlendMode backgroundBlendMode;
 
   const FrameDecoration({
-    @required this.lineColor,
+    required this.lineColor,
     this.color,
     this.step = 1.0,
     this.lineStroke = 1.0,
@@ -157,10 +157,10 @@ class _FrameDecorationPainter extends BoxPainter {
   const _FrameDecorationPainter({
     this.step = 1.0,
     this.color,
-    @required this.lineColor,
-    @required this.lineStroke,
-    @required this.cornerStroke,
-    @required this.cornerLengthRatio,
+    required this.lineColor,
+    required this.lineStroke,
+    required this.cornerStroke,
+    required this.cornerLengthRatio,
     this.gradient,
     this.boxShadow,
     this.backgroundBlendMode,

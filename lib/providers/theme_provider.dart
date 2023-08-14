@@ -11,8 +11,8 @@ class VizorTheme extends StatelessWidget {
   /// The [data] and [child] arguments must not be null.
   const VizorTheme({
     Key key,
-    @required this.data,
-    @required this.child,
+    required this.data,
+    required this.child,
   })  : assert(child != null),
         assert(data != null),
         super(key: key);
@@ -49,8 +49,8 @@ class VizorTheme extends StatelessWidget {
 class _InheritedVizorTheme extends InheritedTheme {
   const _InheritedVizorTheme({
     Key key,
-    @required this.theme,
-    @required Widget child,
+    required this.theme,
+    required Widget child,
   })  : assert(theme != null),
         super(key: key, child: child);
 

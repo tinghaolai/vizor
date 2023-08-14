@@ -14,8 +14,8 @@ class VizorButton extends StatelessWidget {
 
   const VizorButton({
     Key key,
-    @required this.label,
-    @required this.onPressed,
+    required this.label,
+    required this.onPressed,
     this.icon,
     this.color,
     this.borderColor,
@@ -27,7 +27,7 @@ class VizorButton extends StatelessWidget {
 
   factory VizorButton.success({
     Key key,
-    @required Widget label,
+    required Widget label,
     Widget icon,
     EdgeInsets padding,
     VoidCallback onPressed,

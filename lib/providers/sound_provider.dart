@@ -20,7 +20,7 @@ import 'package:soundpool/soundpool.dart';
 class SoundProvider extends StatefulWidget {
   const SoundProvider({
     Key key,
-    @required this.child,
+    required this.child,
     this.streamType = StreamType.notification,
   })  : assert(streamType != null),
         super(key: key);
@@ -90,9 +90,9 @@ class _SoundProviderState extends State<SoundProvider> {
 class _SoundProviderInherited extends InheritedWidget {
   const _SoundProviderInherited({
     Key key,
-    @required this.pool,
-    @required this.sounds,
-    @required Widget child,
+    required this.pool,
+    required this.sounds,
+    required Widget child,
   }) : super(key: key, child: child);
 
   final Soundpool pool;
@@ -131,7 +131,7 @@ class SoundEffects {
 }
 
 class Sound {
-  const Sound({@required pool, @required this.id}) : _pool = pool;
+  const Sound({required pool, required this.id}) : _pool = pool;
 
   final Soundpool _pool;
   final Future<int> id;
