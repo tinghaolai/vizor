@@ -10,7 +10,7 @@ class VizorTheme extends StatelessWidget {
   ///
   /// The [data] and [child] arguments must not be null.
   const VizorTheme({
-    Key key,
+    Key? key,
     required this.data,
     required this.child,
   })  : assert(child != null),
@@ -31,7 +31,7 @@ class VizorTheme extends StatelessWidget {
   /// Defaults to [VizorTheme.fallback] if there is no [VizorTheme] in the given
   /// build context.
   static VizorThemeData of(BuildContext context) {
-    final _InheritedVizorTheme inheritedVizorTheme =
+    final _InheritedVizorTheme? inheritedVizorTheme =
         context.dependOnInheritedWidgetOfExactType<_InheritedVizorTheme>();
 
     return inheritedVizorTheme?.theme?.data ?? _kFallbackTheme;
@@ -48,7 +48,7 @@ class VizorTheme extends StatelessWidget {
 
 class _InheritedVizorTheme extends InheritedTheme {
   const _InheritedVizorTheme({
-    Key key,
+    Key? key,
     required this.theme,
     required Widget child,
   })  : assert(theme != null),
@@ -58,7 +58,7 @@ class _InheritedVizorTheme extends InheritedTheme {
 
   @override
   Widget wrap(BuildContext context, Widget child) {
-    final _InheritedVizorTheme ancestorVizorTheme =
+    final _InheritedVizorTheme? ancestorVizorTheme =
         context.findAncestorWidgetOfExactType<_InheritedVizorTheme>();
     return identical(this, ancestorVizorTheme)
         ? child
@@ -114,10 +114,10 @@ class VizorFrameTheme {
   final double lineStroke;
   final double cornerStroke;
   final double cornerLengthRatio;
-  final Gradient gradient;
+  final Gradient? gradient;
   final List<BoxShadow> boxShadow;
-  final BlendMode backgroundBlendMode;
-  final DecorationPosition position;
+  final BlendMode? backgroundBlendMode;
+  final DecorationPosition? position;
 }
 
 @immutable

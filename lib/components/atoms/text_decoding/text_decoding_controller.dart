@@ -31,7 +31,7 @@ class TextDecodingController {
   String _data = '';
 
   /// Animation frame
-  int _frame;
+  int _frame = 0;
   final String _chars = '!<>-_\\/[]{}—=+*^?#________';
 
   /// Scramble delay
@@ -43,7 +43,7 @@ class TextDecodingController {
   final List<Character> _queue = <Character>[];
 
   /// Constructor
-  TextDecodingController(Function(String) fn, {Duration duration})
+  TextDecodingController(Function(String) fn, {Duration? duration})
       : _fn = fn,
         _delay = duration ?? const Duration(milliseconds: 1);
 

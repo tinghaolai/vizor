@@ -4,21 +4,21 @@ import 'package:vizor/components/atoms/text_decoding/text_decoding_controller.da
 
 class TextDecoding extends StatefulWidget {
   final String data;
-  final TextStyle style;
-  final bool softWrap;
-  final TextAlign textAlign;
-  final TextOverflow overflow;
-  final int maxLines;
-  final TextWidthBasis textWidthBasis;
-  final TextHeightBehavior textHeightBehavior;
-  final TextDecodingController controller;
-  final Duration effectDuration;
-  final bool shouldDecode;
+  final TextStyle? style;
+  final bool? softWrap;
+  final TextAlign? textAlign;
+  final TextOverflow? overflow;
+  final int? maxLines;
+  final TextWidthBasis? textWidthBasis;
+  final TextHeightBehavior? textHeightBehavior;
+  final TextDecodingController? controller;
+  final Duration? effectDuration;
+  final bool? shouldDecode;
 
   const TextDecoding(
     this.data, {
     this.shouldDecode = true,
-    Key key,
+    Key? key,
     this.style,
     this.textAlign,
     this.softWrap = true,
@@ -35,7 +35,7 @@ class TextDecoding extends StatefulWidget {
 }
 
 class _TextDecodingState extends State<TextDecoding> {
-  TextDecodingController _controller;
+  late TextDecodingController _controller;
   String _data = '';
 
   void _effectCallback(String data) {
@@ -51,7 +51,8 @@ class _TextDecodingState extends State<TextDecoding> {
       _controller =
           widget.controller ?? TextDecodingController(_effectCallback);
     });
-    if (widget.shouldDecode) {
+
+    if (widget.shouldDecode!) {
       _controller.setData(widget.data);
     } else {
       setState(() {

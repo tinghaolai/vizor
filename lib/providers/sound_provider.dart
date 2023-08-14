@@ -19,7 +19,7 @@ import 'package:soundpool/soundpool.dart';
 /// ```
 class SoundProvider extends StatefulWidget {
   const SoundProvider({
-    Key key,
+    Key? key,
     required this.child,
     this.streamType = StreamType.notification,
   })  : assert(streamType != null),
@@ -36,16 +36,15 @@ class SoundProvider extends StatefulWidget {
 
   static SoundEffects of(BuildContext context) {
     final _SoundProviderInherited provider = context
-        ?.getElementForInheritedWidgetOfExactType<_SoundProviderInherited>()
-        ?.widget;
+        ?.getElementForInheritedWidgetOfExactType<_SoundProviderInherited>() as _SoundProviderInherited;
 
     return provider.sounds;
   }
 }
 
 class _SoundProviderState extends State<SoundProvider> {
-  Soundpool _pool;
-  SoundEffects _sounds;
+  late Soundpool _pool;
+  late SoundEffects _sounds;
 
   @override
   void initState() {
@@ -89,7 +88,7 @@ class _SoundProviderState extends State<SoundProvider> {
 
 class _SoundProviderInherited extends InheritedWidget {
   const _SoundProviderInherited({
-    Key key,
+    Key? key,
     required this.pool,
     required this.sounds,
     required Widget child,
@@ -118,16 +117,16 @@ class SoundEffects {
 
   final Map<SoundEffect, Sound> _sounds;
 
-  Sound get ask => _sounds[SoundEffect.ask];
-  Sound get click => _sounds[SoundEffect.click];
-  Sound get error => _sounds[SoundEffect.error];
-  Sound get deploy => _sounds[SoundEffect.deploy];
-  Sound get typing => _sounds[SoundEffect.typing];
-  Sound get warning => _sounds[SoundEffect.warning];
-  Sound get typingLong => _sounds[SoundEffect.typingLong];
-  Sound get information => _sounds[SoundEffect.information];
+  Sound? get ask => _sounds[SoundEffect.ask];
+  Sound? get click => _sounds[SoundEffect.click];
+  Sound? get error => _sounds[SoundEffect.error];
+  Sound? get deploy => _sounds[SoundEffect.deploy];
+  Sound? get typing => _sounds[SoundEffect.typing];
+  Sound? get warning => _sounds[SoundEffect.warning];
+  Sound? get typingLong => _sounds[SoundEffect.typingLong];
+  Sound? get information => _sounds[SoundEffect.information];
 
-  Sound get(SoundEffect sound) => _sounds[sound];
+  Sound? get(SoundEffect sound) => _sounds[sound];
 }
 
 class Sound {

@@ -3,21 +3,21 @@ import 'package:vizor/providers/sound_provider.dart';
 import 'package:vizor/providers/theme_provider.dart';
 
 class VizorFrame extends StatefulWidget {
-  final Color color;
-  final Color lineColor;
-  final double lineStroke;
-  final double cornerStroke;
-  final double cornerLengthRatio;
-  final Gradient gradient;
-  final List<BoxShadow> boxShadow;
-  final BlendMode backgroundBlendMode;
+  final Color? color;
+  final Color? lineColor;
+  final double? lineStroke;
+  final double? cornerStroke;
+  final double? cornerLengthRatio;
+  final Gradient? gradient;
+  final List<BoxShadow>? boxShadow;
+  final BlendMode? backgroundBlendMode;
   final DecorationPosition position;
-  final bool enableSoundEffect;
-  final Sound soundEffect;
+  final bool? enableSoundEffect;
+  final Sound? soundEffect;
   final Widget child;
 
   const VizorFrame({
-    Key key,
+    Key? key,
     this.color,
     this.lineColor,
     this.lineStroke = 1.0,
@@ -29,7 +29,7 @@ class VizorFrame extends StatefulWidget {
     this.position = DecorationPosition.background,
     this.enableSoundEffect = false,
     this.soundEffect,
-    this.child,
+    required this.child,
   }) : super(key: key);
 
   @override
@@ -37,8 +37,8 @@ class VizorFrame extends StatefulWidget {
 }
 
 class _VizorFrameState extends State<VizorFrame> with TickerProviderStateMixin {
-  Animation<double> _animation;
-  AnimationController _controller;
+  late Animation<double> _animation;
+  late AnimationController _controller;
 
   @override
   void didChangeDependencies() {
@@ -74,9 +74,9 @@ class _VizorFrameState extends State<VizorFrame> with TickerProviderStateMixin {
     }
 
     if (widget.soundEffect != null) {
-      widget.soundEffect.play();
+      widget.soundEffect?.play();
     } else {
-      SoundProvider.of(context).deploy.play();
+      SoundProvider.of(context).deploy?.play();
     }
   }
 
@@ -89,15 +89,15 @@ class _VizorFrameState extends State<VizorFrame> with TickerProviderStateMixin {
       position: widget.position,
       decoration: FrameDecoration(
         step: _animation.value,
-        color: widget.color ?? theme.color,
-        lineColor: widget.lineColor ?? theme.lineColor,
-        lineStroke: widget.lineStroke ?? theme.lineStroke,
-        cornerStroke: widget.cornerStroke ?? theme.cornerStroke,
-        cornerLengthRatio: widget.cornerLengthRatio ?? theme.cornerLengthRatio,
-        gradient: widget.gradient ?? theme.gradient,
-        boxShadow: widget.boxShadow ?? theme.boxShadow,
+        color: (widget.color ?? theme?.color)!,
+        lineColor: (widget.lineColor ?? theme?.lineColor)!,
+        lineStroke: (widget.lineStroke ?? theme?.lineStroke)!,
+        cornerStroke: (widget.cornerStroke ?? theme?.cornerStroke)!,
+        cornerLengthRatio: (widget.cornerLengthRatio ?? theme?.cornerLengthRatio)!,
+        gradient: (widget.gradient ?? theme?.gradient)!,
+        boxShadow: (widget.boxShadow ?? theme?.boxShadow)!,
         backgroundBlendMode:
-            widget.backgroundBlendMode ?? theme.backgroundBlendMode,
+            (widget.backgroundBlendMode ?? theme?.backgroundBlendMode)!,
       ),
       child: widget.child,
     );
@@ -106,14 +106,14 @@ class _VizorFrameState extends State<VizorFrame> with TickerProviderStateMixin {
 
 class FrameDecoration extends Decoration {
   final double step;
-  final Color color;
+  final Color? color;
   final Color lineColor;
   final double lineStroke;
   final double cornerStroke;
   final double cornerLengthRatio;
-  final Gradient gradient;
-  final List<BoxShadow> boxShadow;
-  final BlendMode backgroundBlendMode;
+  final Gradient? gradient;
+  final List<BoxShadow>? boxShadow;
+  final BlendMode? backgroundBlendMode;
 
   const FrameDecoration({
     required this.lineColor,
@@ -128,31 +128,31 @@ class FrameDecoration extends Decoration {
   });
 
   @override
-  BoxPainter createBoxPainter([onChanged]) {
+  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
     return _FrameDecorationPainter(
       step: step,
-      color: color,
+      color: color!,
       lineColor: lineColor,
       lineStroke: lineStroke,
       cornerStroke: cornerStroke,
       cornerLengthRatio: cornerLengthRatio,
-      gradient: gradient,
-      boxShadow: boxShadow,
-      backgroundBlendMode: backgroundBlendMode,
+      gradient: gradient!,
+      boxShadow: boxShadow!,
+      backgroundBlendMode: backgroundBlendMode!,
     );
   }
 }
 
 class _FrameDecorationPainter extends BoxPainter {
   final double step;
-  final Color color;
-  final Color lineColor;
-  final double lineStroke;
+  final Color? color;
+  final Color? lineColor;
+  final double? lineStroke;
   final double cornerStroke;
   final double cornerLengthRatio;
-  final Gradient gradient;
-  final List<BoxShadow> boxShadow;
-  final BlendMode backgroundBlendMode;
+  final Gradient? gradient;
+  final List<BoxShadow>? boxShadow;
+  final BlendMode? backgroundBlendMode;
 
   const _FrameDecorationPainter({
     this.step = 1.0,
@@ -168,7 +168,7 @@ class _FrameDecorationPainter extends BoxPainter {
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    final rect = offset & configuration.size;
+    final rect = offset & configuration.size!;
 
     _paintShadows(canvas, rect);
     _paintBackgroundColor(canvas, rect);
@@ -178,7 +178,7 @@ class _FrameDecorationPainter extends BoxPainter {
 
   void _drawCorners(Canvas canvas, Rect rect) {
     final paint = Paint()
-      ..color = lineColor.withOpacity(step)
+      ..color = (lineColor?.withOpacity(step))!
       ..strokeWidth = cornerStroke
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.square;
@@ -216,8 +216,8 @@ class _FrameDecorationPainter extends BoxPainter {
 
   void _drawRect(Canvas canvas, Rect rect) {
     final paint = Paint()
-      ..color = lineColor.withOpacity(step)
-      ..strokeWidth = lineStroke
+      ..color = (lineColor?.withOpacity(step))!
+      ..strokeWidth = lineStroke!
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.square;
 
@@ -234,8 +234,8 @@ class _FrameDecorationPainter extends BoxPainter {
     ).transform(step);
 
     return Path()
-      ..moveTo(tween.topLeft.dx, tween.topLeft.dy)
-      ..relativeLineTo(tween.width, 0.0);
+      ..moveTo((tween?.topLeft.dx)!, (tween?.topLeft.dy)!)
+      ..relativeLineTo((tween?.width)!, 0.0);
   }
 
   Path _rightPath(Rect rect) {
@@ -245,8 +245,8 @@ class _FrameDecorationPainter extends BoxPainter {
     ).transform(step);
 
     return Path()
-      ..moveTo(tween.topRight.dx, tween.topRight.dy)
-      ..relativeLineTo(0.0, tween.height);
+      ..moveTo((tween?.topRight.dx)!, (tween?.topRight.dy)!)
+      ..relativeLineTo(0.0, (tween?.height)!);
   }
 
   Path _bottomPath(Rect rect) {
@@ -256,8 +256,8 @@ class _FrameDecorationPainter extends BoxPainter {
     ).transform(step);
 
     return Path()
-      ..moveTo(tween.bottomLeft.dx, tween.bottomLeft.dy)
-      ..relativeLineTo(tween.width, 0.0);
+      ..moveTo((tween?.bottomLeft.dx)!, (tween?.bottomLeft.dy)!)
+      ..relativeLineTo((tween?.width)!, 0.0);
   }
 
   Path _leftPath(Rect rect) {
@@ -267,8 +267,8 @@ class _FrameDecorationPainter extends BoxPainter {
     ).transform(step);
 
     return Path()
-      ..moveTo(tween.topLeft.dx, tween.topLeft.dy)
-      ..relativeLineTo(0.0, tween.height);
+      ..moveTo((tween?.topLeft.dx)!, (tween?.topLeft.dy)!)
+      ..relativeLineTo(0.0, (tween?.height)!);
   }
 
   void _paintShadows(Canvas canvas, Rect rect) {
@@ -276,7 +276,7 @@ class _FrameDecorationPainter extends BoxPainter {
       return;
     }
 
-    for (final shadow in boxShadow) {
+    for (final shadow in boxShadow!) {
       final paint = shadow.toPaint();
       final bounds = rect.shift(shadow.offset).inflate(shadow.spreadRadius);
       canvas.drawRect(bounds, paint);
@@ -290,8 +290,9 @@ class _FrameDecorationPainter extends BoxPainter {
 
     final paint = Paint();
 
-    if (backgroundBlendMode != null) paint.blendMode = backgroundBlendMode;
-    if (color != null) paint.color = color;
+    if (backgroundBlendMode != null) paint.blendMode = backgroundBlendMode!;
+    if (color != null) paint.color = color!;
+    final gradient = this.gradient;
     if (gradient != null) {
       paint.shader = gradient.createShader(rect);
     }

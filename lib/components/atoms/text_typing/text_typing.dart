@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:vizor/components/atoms/text_typing/text_typing_controller.dart';
 
 class TextTyping extends StatefulWidget {
-  final String data;
-  final TextStyle style;
-  final bool softWrap;
-  final TextAlign textAlign;
-  final TextOverflow overflow;
-  final int maxLines;
-  final TextWidthBasis textWidthBasis;
-  final TextHeightBehavior textHeightBehavior;
-  final TextTypingController controller;
-  final Duration effectDuration;
+  final String? data;
+  final TextStyle? style;
+  final bool? softWrap;
+  final TextAlign? textAlign;
+  final TextOverflow? overflow;
+  final int? maxLines;
+  final TextWidthBasis? textWidthBasis;
+  final TextHeightBehavior? textHeightBehavior;
+  final TextTypingController? controller;
+  final Duration? effectDuration;
 
   const TextTyping(
     this.data, {
-    Key key,
+    Key? key,
     this.style,
     this.textAlign,
     this.softWrap = true,
@@ -33,7 +33,7 @@ class TextTyping extends StatefulWidget {
 }
 
 class _TextTypingState extends State<TextTyping> {
-  TextTypingController _controller;
+  late TextTypingController _controller;
   String _data = '';
 
   void _effectCallback(String data) {
@@ -48,18 +48,18 @@ class _TextTypingState extends State<TextTyping> {
       _controller = widget.controller ??
           TextTypingController(
             _effectCallback,
-            duration: widget.effectDuration,
+            duration: widget.effectDuration!,
           );
     });
     super.initState();
-    _controller.setData(widget.data);
+    _controller.setData(widget.data!);
   }
 
   @override
   void didUpdateWidget(TextTyping oldWidget) {
     if (oldWidget.data != widget.data) {
       _controller.setData(
-        widget.data,
+        widget.data!,
         removeFirst: true,
       );
     }

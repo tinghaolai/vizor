@@ -4,16 +4,16 @@ import 'package:vizor/vizor.dart';
 class VizorButton extends StatelessWidget {
   final Widget label;
   final VoidCallback onPressed;
-  final Widget icon;
-  final Color color;
-  final Color borderColor;
-  final Color textColor;
-  final Color backgroundColor;
-  final EdgeInsets padding;
-  final SoundEffect soundEffectOnPressed;
+  final Widget? icon;
+  final Color? color;
+  final Color? borderColor;
+  final Color? textColor;
+  final Color? backgroundColor;
+  final EdgeInsets? padding;
+  final SoundEffect? soundEffectOnPressed;
 
   const VizorButton({
-    Key key,
+    Key? key,
     required this.label,
     required this.onPressed,
     this.icon,
@@ -26,18 +26,18 @@ class VizorButton extends StatelessWidget {
   }) : super(key: key);
 
   factory VizorButton.success({
-    Key key,
+    Key? key,
     required Widget label,
-    Widget icon,
-    EdgeInsets padding,
-    VoidCallback onPressed,
+    Widget? icon,
+    EdgeInsets? padding,
+    VoidCallback? onPressed,
   }) {
     return VizorButton(
       key: key,
       label: label,
       icon: icon,
       padding: padding,
-      onPressed: onPressed,
+      onPressed: onPressed!,
       color: Colors.green,
       textColor: Colors.green,
       borderColor: Colors.lightGreenAccent,
@@ -46,11 +46,11 @@ class VizorButton extends StatelessWidget {
   }
 
   factory VizorButton.active({
-    Key key,
-    Widget label,
-    Widget icon,
-    EdgeInsets padding,
-    VoidCallback onPressed,
+    Key? key,
+    required Widget label,
+    Widget? icon,
+    EdgeInsets? padding,
+    required VoidCallback onPressed,
   }) {
     return VizorButton(
       key: key,
@@ -67,11 +67,11 @@ class VizorButton extends StatelessWidget {
   }
 
   factory VizorButton.cancel({
-    Key key,
-    Widget label,
-    Widget icon,
-    EdgeInsets padding,
-    VoidCallback onPressed,
+    Key? key,
+    required Widget label,
+    Widget? icon,
+    EdgeInsets? padding,
+    required VoidCallback onPressed,
   }) {
     return VizorButton(
       key: key,
@@ -88,11 +88,11 @@ class VizorButton extends StatelessWidget {
   }
 
   factory VizorButton.error({
-    Key key,
-    Widget label,
-    Widget icon,
-    EdgeInsets padding,
-    VoidCallback onPressed,
+    Key? key,
+    required Widget label,
+    Widget? icon,
+    EdgeInsets? padding,
+    required VoidCallback onPressed,
   }) {
     return VizorButton(
       key: key,
@@ -109,7 +109,7 @@ class VizorButton extends StatelessWidget {
 
   void _onPressed(BuildContext context) {
     onPressed?.call();
-    SoundProvider.of(context)?.get(soundEffectOnPressed)?.play();
+    SoundProvider.of(context)?.get(soundEffectOnPressed!)?.play();
   }
 
   @override
@@ -119,7 +119,7 @@ class VizorButton extends StatelessWidget {
 
     return VizorFrame(
       color: backgroundColor,
-      lineColor: borderColor ?? theme.borderColor,
+      lineColor: borderColor ?? theme?.borderColor,
       child: _buildFlatButton(context),
     );
   }
@@ -128,8 +128,8 @@ class VizorButton extends StatelessWidget {
     final theme = VizorTheme.of(context)?.buttonTheme ??
         VizorThemeData.fallback()?.buttonTheme;
 
-    final color = this.color ?? theme.color;
-    final splashColor = color.withOpacity(0.3);
+    final color = this.color ?? theme?.color;
+    final splashColor = color?.withOpacity(0.3);
 
     if (icon == null) {
       return TextButton(
@@ -147,19 +147,19 @@ class VizorButton extends StatelessWidget {
         onPressed: () => _onPressed(context),
         color: color,
         splashColor: splashColor,
-        padding: padding ?? theme.padding,
-        icon: icon,
+        padding: padding ?? theme?.padding,
+        icon: icon!,
       );
     } else {
       return TextButton.icon(
         onPressed: () => _onPressed(context),
         style: TextButton.styleFrom(
-          foregroundColor: textColor ?? theme.textColor,
+          foregroundColor: textColor ?? theme?.textColor,
           backgroundColor: splashColor,
           minimumSize: Size.zero,
-          padding: padding ?? theme.padding,
+          padding: padding ?? theme?.padding,
         ),
-        icon: icon,
+        icon: icon!,
         label: label,
       );
     }

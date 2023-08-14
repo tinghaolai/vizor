@@ -20,16 +20,16 @@ class TextTypingController {
   bool _cancel = false;
 
   /// Current text displayed
-  String _data;
+  String _data = '';
 
   /// Delay between letters
-  Duration _delay;
+  Duration _delay = const Duration(milliseconds: 500);
 
   /// Total animation duration
   final Duration _duration;
 
   /// Constructor
-  TextTypingController(Function(String) fn, {Duration duration})
+  TextTypingController(Function(String) fn, {Duration? duration})
       : _fn = fn,
         _duration = duration ?? const Duration(milliseconds: 500);
 
